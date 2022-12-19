@@ -1,24 +1,20 @@
 import logo from './logo.svg';
 import './App.css';
+import { Link } from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <h1>Home Page</h1>
+      <ul>
+        <li><Link to='/'>Home</Link></li>
+        <li><Link to='/cars'>Les voitures</Link></li>
+        <li><Link to='/cars/new'>Créer une voiture</Link></li>
+        <li><Link to='/cars/Tonale'>Alfa Romeo Tonale</Link></li>
+        <li><Link to='/marques'>Liste des marques</Link></li>
+        <li><Link to='/marques/alfa'>Alfa Romeo</Link></li>
+      </ul>
+    </>
   );
 }
 
