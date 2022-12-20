@@ -9,30 +9,48 @@ import NotFound from './components/NotFound';
 import Cars from './components/Cars';
 import Car from './components/Car';
 import NewCar from './components/NewCar';
+import ErrorPage from './components/errorPage';
 
 // mon router 
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-const MyApp = () => (
-  <Router>
-    <Routes>
-      <Route path='/' element={<App />} />
-      <Route path='cars' element={<Cars />}>
-        <Route path=':model' element={<Car />} />
-        <Route path='new' element={<NewCar />} />
-      </Route>
-      <Route path='marques/:name' element={<Marque />} />
-      <Route path='marques' element={<Marques />} />
-      <Route path='*' element={<NotFound />} />
-    </Routes>
-  </Router>
-)
+const router = createBrowserRouter([
+  {
+    path:"/",
+    element: <App />,
+    errorElement: <ErrorPage />
+  }, 
+  {
+    path: '/marques',
+    element: <Marques />
+  },
+  {
+    path: '/marques/:name',
+    element: <Marque />
+  },
+  {
+    path: '/cars',
+    element: <Cars />,
+    children : [
+      {
+        path: '/cars/:model',
+        element: <Car />
+      },
+      {
+        path: "/cars/new",
+        element: <NewCar />
+      }
+    ]
+  }
+
+])
+
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <MyApp />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 
